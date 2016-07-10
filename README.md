@@ -7,6 +7,8 @@ TODO
 - 🐎  `:racehorse:` when improving performance
 - 🚱  `:non-potable_water:` when plugging memory leaks
 - 📝  `:memo:` when writing docs
+- ➕  `:heavy_plus_sign:` when adding some features
+- ➖  `:heavy_minus_sign:` when removing some features
 - 🐧  `:penguin:` when fixing something on Linux
 - 🍎  `:apple:` when fixing something on macOS
 - 🏁  `:checkered_flag:` when fixing something on Windows
