@@ -10,7 +10,7 @@ class PostsController < ApplicationController
     rss = open(url, 'User-Agent' => ua)
     feed = RSS::Parser.parse(rss)
     items = feed.items.map do |i|
-      { link: i.link, title: i.title, desc: i.description, date: i.dc_date }
+      { url: i.link, title: i.title, comment: i.description, date: i.dc_date }
     end
     render json: items
   end
