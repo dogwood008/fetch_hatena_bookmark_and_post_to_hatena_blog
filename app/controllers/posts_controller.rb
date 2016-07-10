@@ -12,6 +12,7 @@ class PostsController < ApplicationController
     items = feed.items.map do |i|
       { url: i.link, title: i.title, comment: i.description, date: i.dc_date }
     end
+    items.delete_if { |i| Post.contains_by_post_date?(i[:date]) }
     render json: items
   end
 
