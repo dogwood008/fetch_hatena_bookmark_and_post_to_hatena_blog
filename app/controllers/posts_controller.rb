@@ -3,18 +3,21 @@ class PostsController < ApplicationController
   require 'open-uri'
 
   before_action :set_post, only: [:show, :update, :destroy]
+  before_action :fetch_feed, only: [:fetch, :fetch_and_post]
 
   def fetch
-    url = 'http://b.hatena.ne.jp/dogwood008/rss'
-    ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
-    rss = open(url, 'User-Agent' => ua)
-    feed = RSS::Parser.parse(rss)
-    rss.close
-    items = feed.items.map do |i|
-      { url: i.link, title: i.title, comment: i.description, date: i.dc_date }
-    end
-    items.delete_if { |i| Post.contains_by_post_date?(i[:date]) }
-    render json: items
+    render json: @feeds
+  end
+
+  def fetch_and_post
+    already_post_url = Post.first&.url
+    already_post_index = @feeds.index {|f| f[:url] == already_post_url }
+    not_yet_post_urls = if already_post_index
+                          @feeds.values_at(Range.new(0, already_post_index - 1))
+                        else
+                          @feeds
+                        end
+    render json: not_yet_post_urls
   end
 
   # GET /posts
@@ -63,5 +66,16 @@ class PostsController < ApplicationController
     # Only allow a trusted parameter "white list" through.
     def post_params
       params.require(:post).permit(:title, :url, :comment)
+    end
+
+    def fetch_feed
+      url = 'http://b.hatena.ne.jp/dogwood008/rss'
+      ua = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36'
+      rss = open(url, 'User-Agent' => ua)
+      feed = RSS::Parser.parse(rss)
+      rss.close
+      @feeds = feed.items.map do |i|
+        { url: i.link, title: i.title, comment: i.description, date: i.dc_date }
+      end
     end
 end
