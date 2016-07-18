@@ -11,13 +11,7 @@ class PostsController < ApplicationController
   end
 
   def fetch_and_post
-    already_post_url = Post.first&.url
-    already_post_index = @feeds.index { |f| f[:url] == already_post_url }
-    not_yet_post_items = if already_post_index
-                          @feeds.values_at(Range.new(0, already_post_index - 1))
-                        else
-                          @feeds
-                        end
+    not_yet_post_items = extract_not_yet_post_items(Post.last_url, @feeds)
     render json: post(not_yet_post_items)
   end
 
@@ -77,6 +71,19 @@ class PostsController < ApplicationController
       rss.close
       @feeds = feed.items.map do |i|
         { url: i.link, title: i.title, comment: i.description, date: i.dc_date }
+      end
+    end
+
+    def get_already_post_index(already_post_url, feeds)
+      feeds.index { |f| f[:url] == already_post_url }
+    end
+
+    def extract_not_yet_post_items(already_post_url, feeds)
+      already_post_index = get_already_post_index(already_post_url, feeds)
+      if already_post_index
+        feeds.values_at(Range.new(0, already_post_index - 1))
+      else
+        feeds
       end
     end
 end
