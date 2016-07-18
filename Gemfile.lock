@@ -50,6 +50,7 @@ GEM
     arel (7.0.0)
     builder (3.2.2)
     byebug (9.0.5)
+    coderay (1.1.1)
     concurrent-ruby (1.0.2)
     erubis (2.7.0)
     ffi (1.9.13)
@@ -76,6 +77,13 @@ GEM
     oauth (0.4.7)
     pg (0.18.4)
     pkg-config (1.1.7)
+    pry (0.10.4)
+      coderay (~> 1.1.0)
+      method_source (~> 0.8.1)
+      slop (~> 3.4)
+    pry-byebug (3.4.0)
+      byebug (~> 9.0)
+      pry (~> 0.10)
     puma (3.4.0)
     rack (2.0.1)
     rack-test (0.6.3)
@@ -107,6 +115,7 @@ GEM
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
       ffi (>= 0.5.0)
+    slop (3.6.0)
     spring (1.7.2)
     spring-watcher-listen (2.0.0)
       listen (>= 2.7, < 4.0)
@@ -135,6 +144,8 @@ DEPENDENCIES
   hatenablog!
   listen (~> 3.0.5)
   pg
+  pry
+  pry-byebug
   puma (~> 3.0)
   rails (~> 5.0.0)
   spring
