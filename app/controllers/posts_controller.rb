@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  include Htnb
   require 'rss'
   require 'open-uri'
 
@@ -12,12 +13,12 @@ class PostsController < ApplicationController
   def fetch_and_post
     already_post_url = Post.first&.url
     already_post_index = @feeds.index { |f| f[:url] == already_post_url }
-    not_yet_post_urls = if already_post_index
+    not_yet_post_items = if already_post_index
                           @feeds.values_at(Range.new(0, already_post_index - 1))
                         else
                           @feeds
                         end
-    render json: not_yet_post_urls
+    render json: post(not_yet_post_items)
   end
 
   # GET /posts
