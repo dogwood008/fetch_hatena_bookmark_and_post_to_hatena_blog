@@ -38,3 +38,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 group :production do
   gem 'pg'
 end
+
+gem 'hatenablog', github: 'dogwood008/hatenablog', branch: 'feature/erb_support_for_config_file'

@@ -22,15 +22,13 @@ Style/ClassAndModuleChildren:
   Exclude:
     - 'test/test_helper.rb'
 
-# Offense count: 7
+# Offense count: 6
 Style/Documentation:
   Exclude:
     - 'spec/**/*'
     - 'test/**/*'
-    - 'app/controllers/posts_controller.rb'
     - 'app/mailers/application_mailer.rb'
     - 'app/models/application_record.rb'
-    - 'app/models/post.rb'
     - 'config/application.rb'
     - 'db/migrate/*'
 
@@ -41,12 +39,6 @@ Style/EmptyLines:
     - 'config/environments/development.rb'
     - 'config/environments/production.rb'
 
-# Offense count: 1
-# Cop supports --auto-correct.
-Style/EmptyLinesAroundAccessModifier:
-  Exclude:
-    - 'app/controllers/posts_controller.rb'
-
 # Offense count: 2
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles.
@@ -54,14 +46,6 @@ Style/EmptyLinesAroundAccessModifier:
 Style/EmptyLinesAroundBlockBody:
   Exclude:
     - 'db/schema.rb'
-
-# Offense count: 2
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle, SupportedStyles.
-# SupportedStyles: normal, rails
-Style/IndentationConsistency:
-  Exclude:
-    - 'app/controllers/posts_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
@@ -74,9 +58,9 @@ Style/SpaceInsideBrackets:
   Exclude:
     - 'config/environments/production.rb'
 
-# Offense count: 26
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, SupportedStyles, ConsistentQuotesInMultiline.
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiterals:
   Enabled: false
+
