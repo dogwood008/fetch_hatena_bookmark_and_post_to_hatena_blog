@@ -10,7 +10,7 @@ module Htnb
   private
 
   def convert_item_to_array(items)
-    title = "#{today} マイトレンドニュース"
+    title = "#{today} トレンドニュース"
     body = make_markdown_body(items)
     category = [:test]
     draft = 'yes'
@@ -18,7 +18,7 @@ module Htnb
   end
 
   def make_markdown_body(items)
-    items.inject('') { |str, i| str << "- [#{i[:title]}](#{i[:url]})\n  - #{i[:comment]}\n" }
+    items.inject('') { |str, i| str << "### [#{i[:title]}](#{i[:url]})\n#{i[:comment]}\n[#{i[:url]}:embed:cite]\n\n" }
   end
 
   def convert_entry_hash_to_array(hash)
