@@ -1,9 +1,13 @@
 class PostsController < ApplicationController
   include Htnb
+  include ActionController::HttpAuthentication::Basic::ControllerMethods
+  include ActionController::HttpAuthentication::Token::ControllerMethods
+
   require 'rss'
   require 'open-uri'
 
   before_action :fetch_feed, only: [:fetch, :fetch_and_post]
+  http_basic_authenticate_with name: ENV['BASIC_AUTH_ID'], password: ENV['BASIC_AUTH_PW']
 
   def fetch
     render json: @feeds
