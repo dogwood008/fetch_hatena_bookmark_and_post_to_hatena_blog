@@ -11,6 +11,8 @@ class PostsController < ApplicationController
 
   def fetch_and_post
     not_yet_post_items = extract_not_yet_post_items(Post.last_url, @feeds)
+    (render json: []; return) if not_yet_post_items.empty?
+    Post.last_url = not_yet_post_items.first[:url]
     render json: post(not_yet_post_items)
   end
 
@@ -33,10 +35,6 @@ class PostsController < ApplicationController
 
   def extract_not_yet_post_items(already_post_url, feeds)
     already_post_index = get_already_post_index(already_post_url, feeds)
-    if already_post_index
-      feeds.values_at(Range.new(0, already_post_index - 1))
-    else
-      feeds
-    end
+    already_post_index ? feeds[0, already_post_index] : feeds
   end
 end
