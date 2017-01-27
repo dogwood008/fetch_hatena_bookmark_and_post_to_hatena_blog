@@ -12,8 +12,8 @@ module Htnb
   def convert_item_to_array(items)
     title = "#{today} トレンドニュース"
     body = make_markdown_body(items)
-    category = [:TrendNews]
-    draft = 'no'
+    category = ENV['POST_CATEGORIES']
+    draft = ENV['IS_DRAFT'].nil? ? 'no' : 'yes'
     [title, body, category, draft]
   end
 
