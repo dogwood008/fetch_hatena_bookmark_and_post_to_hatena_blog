@@ -29,6 +29,10 @@ Set these variables as environments.
   - follow [this instruction](https://github.com/kymmt90/hatenablog#2-get-your-access-token-and-access-token-secret)
 - HTN_ACCESS_TOKEN_SECRET
   - follow [this instruction](https://github.com/kymmt90/hatenablog#2-get-your-access-token-and-access-token-secret)
+- POST_CATEGORIES
+  - e.g.) ruby, ruby on rails, android
+- IS_DRAFT (optional)
+  - e.g.) true
 
 ## Rails
 
