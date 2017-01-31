@@ -12,7 +12,7 @@ module Htnb
   def convert_item_to_array(items)
     title = "#{today} トレンドニュース"
     body = make_markdown_body(items)
-    category = ENV['POST_CATEGORIES']
+    category = ENV['POST_CATEGORIES'].split(',')
     draft = ENV['IS_DRAFT'].nil? ? 'no' : 'yes'
     [title, body, category, draft]
   end
